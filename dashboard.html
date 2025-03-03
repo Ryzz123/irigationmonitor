@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>
+        Halaman Dashboard
+    </title>
+</head>
+<body>
+    <div class="min-h-screen flex flex-col bg-[#EBEFEE]">
+        <div class="relative h-1/2">
+            <div class="absolute inset-x-0 top-0 h-full">
+                <img src="/asset/bg.png"/>
+            </div>
+
+            <div class="relative z-10 p-5">
+                <h1 class="uppercase font-bold text-3xl text-white mt-8">
+                    Dashboard
+                </h1>
+                <p class="text-white">Hallo Dania 🖐</p>
+
+                <div
+                        class="p-4 bg-white rounded-lg flex justify-between items-center mt-6 shadow-sm"
+                >
+                    <p class="text-[#026A75] font-bold">Pompa Aktif</p>
+                    <p class="text-[#026A75] font-bold pompa-aktif">
+                        <span class="text-[#858585]">00.00.00</span>
+                    </p>
+                </div>
+
+                <div class="p-4 bg-white mt-6 rounded-lg shadow-sm">
+                    <div class="flex flex-col h-72 gap-4 items-center">
+                        <p class="text-[#026A75] text-lg font-bold w-full">
+                            Kelembapan Tanah
+                        </p>
+                        <canvas id="chartPie" class="p-14"></canvas>
+                    </div>
+                </div>
+
+                <button class="group p-4 w-full bg-white hover:bg-gray-100/60 rounded-lg flex justify-between items-center mt-6 shadow-sm">
+                    <div class="flex gap-4 items-center">
+                        <img class="group-hover:opacity-60" src="/asset/icon/pompa-utama.png"/>
+                        <p class="group-hover:text-[#026A75]/60 text-[#026A75] font-bold">Pompa</p>
+                    </div>
+
+                    <!-- <p class="group-hover:text-[#FF0000]/60 text-[#FF0000] text-sm">Tidak berfungsi</p> -->
+                    <p class="group-hover:text-green-400/60 text-green-400 text-sm">Sedang berfungsi</p>
+                </button>
+
+                <table border="1" cellpadding="1" class="table-fixed w-full text-center bg-white my-5">
+                    <thead class="">
+                    <tr>
+                        <th class="w-[15%] text-[#026A75] p-2 border border-gray-300 px-1">
+                            No
+                        </th>
+                        <th class="text-[#026A75] p-2 border border-gray-300 px-1">
+                            Tanggal
+                        </th>
+                        <th class="text-[#026A75] p-2 border border-gray-300 px-1">Jam</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="text-[#026A75] p-2 border border-gray-300 px-1">1</td>
+                        <td class="text-[#9D9999] p-2 border border-gray-300 px-1">
+                            01-03-2024
+                        </td>
+                        <td class="text-[#9D9999] p-2 border border-gray-300 px-1">
+                            07:00
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const chartPie = new Chart("chartPie", {
+            type: "doughnut",
+            data: {
+                datasets: [
+                    {
+                        data: [54, 100 - 54],
+                        backgroundColor: ["#026A75", "#EBEFEE"],
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: "right",
+                    },
+                },
+                elements: {
+                    arc: {
+                        borderWidth: 1,
+                    },
+                },
+                cutout: "70%",
+            },
+            plugins: [
+                {
+                    id: "centerText",
+                    beforeDraw: function (chart) {
+                        const {width, height, ctx} = chart;
+                        ctx.restore();
+                        const fontSize = (height / 100).toFixed(2);
+                        ctx.font = `${fontSize}em sans-serif`;
+                        ctx.textBaseline = "middle";
+
+                        const data = chart.data.datasets[0].data;
+                        const total = data.reduce((acc, val) => acc + val, 0);
+                        const text = `${Math.round((data[0] / total) * 100)}%`;
+                        const textX = Math.round(width / 2);
+                        const textY = Math.round(height / 2);
+
+                        ctx.fillStyle = "#026A75";
+                        ctx.textAlign = "center";
+                        ctx.fillText(text, textX, textY);
+                        ctx.save();
+                    },
+                },
+            ],
+        });
+
+        setInterval(() => {
+            const pompaAktif = document.querySelector(".pompa-aktif");
+            const waktu = pompaAktif.querySelector("span");
+            const waktuArray = waktu.innerText.split(".");
+
+            let jam = parseInt(waktuArray[0]);
+            let menit = parseInt(waktuArray[1]);
+            let detik = parseInt(waktuArray[2]);
+
+            detik++;
+            if (detik === 60) {
+                detik = 0;
+                menit++;
+            }
+
+            if (menit === 60) {
+                menit = 0;
+                jam++;
+            }
+
+            waktu.innerText = `${jam < 10 ? "0" + jam : jam}.${menit < 10 ? "0" + menit : menit}.${detik < 10 ? "0" + detik : detik}`;
+        }, 1000);
+    </script>
+</body>
+</html>

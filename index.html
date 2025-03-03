@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>
+        Halaman Splash Screen
+    </title>
+</head>
+<body>
+    <div class="h-screen flex flex-col">
+        <div class="h-[55%] overflow-hidden relative">
+            <img src="/asset/splash-screen.jpg" class="-translate-y-20" />
+            <div
+                    class="bg-linear-to-b from-transparent to-white absolute inset-x-0 bottom-0 h-40 z-20"
+            ></div>
+        </div>
+
+        <div class="px-[32px] flex flex-col justify-between grow pb-[32px]">
+            <div class="pt-5">
+                <h1 class="text-3xl text-[#026A75] font-bold">
+                    Monitoring Irrigation
+                </h1>
+                <p class="text-black text-sm mt-4">
+                    Lorem ipsum dolor sit amet consectetur. Ullamcorper consequat
+                    bibendum purus ac nunc. Ipsum proin diam tincidunt eros dictum
+                    tempus convallis tincidunt. Amet arcu ultrices ut ridiculus duis
+                    ultricies. Quis sagittis aliquam sed ac arcu porttitor semper.
+                </p>
+            </div>
+
+            <button
+                    onclick="window.location.href = './login.html'"
+                    class="py-3 text-center w-full bg-[#026A75] active:bg-gray-200/60 text-white font-semibold rounded-lg cursor-pointer"
+                    type="button"
+            >
+                Login
+            </button>
+        </div>
+    </div>
+</body>
+</html>

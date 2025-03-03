@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>
+        Halaman Login
+    </title>
+</head>
+<body>
+    <div class="h-screen flex flex-col bg-[#157681]">
+        <div class="bg-[#026A75] h-[48%] relative overflow-hidden">
+            <img src="/asset/bg-login.png"/>
+            <div class="absolute inset-x-[32px] bottom-[32px]">
+                <h1 class="text-3xl font-bold text-white">Hello !</h1>
+                <p class="text-white">Welcome to Irrigation Monitoring</p>
+            </div>
+        </div>
+
+        <div class="grow bg-[#EBEFEE] rounded-t-4xl p-[32px] flex flex-col">
+            <h1 class="text-3xl font-bold text-[#026A75]">Login</h1>
+
+            <form class="mt-6 grow flex flex-col justify-between">
+                <div class="flex flex-col gap-4">
+                    <div class="bg-white flex py-2.5 px-4 rounded-lg overflow-hidden gap-2.5">
+                        <img class="w-6" src="/asset/icon/sms.png" />
+                        <input
+                                class="w-full focus:outline-none border-none focus:ring-0 appearance-none disabled:cursor-not-allowed"
+                                placeholder="Email"
+                                type="email"
+                        />
+                    </div>
+
+                    <div class="bg-white flex py-2.5 px-4 rounded-lg overflow-hidden gap-2.5">
+                        <img class="w-6" src="/asset/icon/lock.png" />
+                        <input
+                                class="w-full focus:outline-none border-none focus:ring-0 appearance-none disabled:cursor-not-allowed"
+                                placeholder="Password"
+                                type="password"
+                        />
+                    </div>
+
+                    <div>
+                        <input type="checkbox" class="accent-[#026A75]" id="remember" />
+                        <label for="remember" class="text-[#026A75]">Ingatkan saya</label>
+                    </div>
+                </div>
+
+                <button
+                        onclick="window.location.href = './dashboard.html'"
+                        class="py-3 text-center w-full bg-[#026A75] active:bg-gray-200/60 text-white font-semibold rounded-lg cursor-pointer"
+                        type="button"
+                >
+                    Login
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
